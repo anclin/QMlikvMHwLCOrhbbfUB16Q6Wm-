@@ -115,82 +115,6 @@ return
  ---------------------------------------------------------------------------------------------
 
 
-
----------------  CHROME STOCK VIDEO HIVE----------
-
-^Numpad5::
-	Send, {Tab}
-	Send, {Right}
-	Send, {Right}
-	Send, {Tab}
-	Send, {Right}
-	Send, {Tab}
-	Send, {Down}
-	Send, {Down}
-	Send, {Down}
-	Send, {Tab}
-	Send, {Tab}
-	Send, 3840x2160
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Down}
-	Send, {Down}
-	Send, {Tab}
-	Send, 300MB
-	Send, {Tab}
-	Send, {Tab}
-	Send, 0:29
-	Send, {Tab}
-	Send, 0:29
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Tab}
-
-	Send, {Space}
-	Send, {Tab}
-	Send, {Down}
-	Send, {Down}
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Space}
-	Send, {Tab}
-	Send, {Down}
-
-	Send, {Tab}
-	Send, {Space}
-	Send, {Tab}
-	Send, {Down}
-
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Tab}
-	Send, dark, clouds, sky, blue, sunset, city, scene, beautiful, business, background, landscape, architecture, building, downtown, storm
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Tab}
-	Send, 30	
-	Send, {Tab}
-	Send, {Tab}
-	Send, 60
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Tab}
-	Send, {Space}
-;	Send, {Enter}		
-return
-
-#T::
-IfWinNotExist, ahk_class Chrome_WidgetWin_1
-		{
-		Run, C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
-		}
-		else
-		WinActivate ahk_class Chrome_WidgetWin_1
-		Send ^T
-		return
-
 ------------------------------------------------------------------------------------------------------
 ---------------- Adobe After Effects  ----------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
@@ -318,7 +242,7 @@ Send, {Down}{Down}{Left}X
 Sleep, 5
 Send, ^{End}{Left}Y
 Return
-*/
+
 :*:tttemp::
 Send, {Up}{End}
 Sleep, 10
@@ -358,20 +282,20 @@ Send, wiggle(1,10){left}{left}{left}{left}
 Sleep, 5
 Send, {Shift Left Left}
 Return
-
+*/
 ------------------------------------------------------------------------------------------------------
 ---------------- Adobe Premiere Pro ------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
 #IfWinActive, ahk_exe Adobe Premiere Pro.exe
 Return
 
-
+/*
 :*:_hor::_horizontal
 :*:_ver::_vertical
 :*:_sq::_square
-
+*/
 -------------------- FX Warp -------------------
-
+/*
 ^!+E::
 if counter >= 0 ; setTimer already started, so we log the keypress instead
 {
@@ -400,7 +324,7 @@ if counter = 2 ; The key is pressed thrice
 }
 counter = -1
 return
-
+*/
 ----------------------- FAST NESTING OR/AND STABELIZE ---------------------------------------
 <^n::
 t := A_PriorHotkey == A_ThisHotkey && A_TimeSincePriorHotkey < 200 ? "off" : -200
@@ -635,7 +559,7 @@ Esc::
 -------------------------------------------------------------------------------------------------------------
 ---------------- Blackmagic Davinci Resolve -----------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
-
+/*
 #IfWinActive, ahk_exe Resolve.exe
 Return
 
@@ -680,8 +604,7 @@ MouseClick, Left
 Return
 
 #IfWinActive
-
- ----------------  END APP SHORTCUTS  ---------------------------------------------------------------
+*/
 
 
 
@@ -817,32 +740,34 @@ FileCreateDir, %Title%\01_PHOTOS_RAW
 ;FileCreateDir, %Title%\01_PHOTOS_RAW\Drone
 ;FileCreateDir, %Title%\01_PHOTOS_RAW\Camera
 
-FileCreateDir, %Title%\02_PHOTOS_TIFs
+FileCreateDir, %Title%\02_PHOTOS_JPG
 ;FileCreateDir, %Title%\02_PHOTOS_TIFs\Drone
 ;FileCreateDir, %Title%\02_PHOTOS_TIFs\Camera
 
 FileCreateDir, %Title%\03_PROGRAMS
 
-FileCreateDir, %Title%\04_EXPORT_OBJ
-FileCreateDir, %Title%\04_EXPORT_OBJ\RAW
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_00
-FileCopy, C:\Default.obj.rcInfo, %Title%\04_EXPORT_OBJ\LOD_00
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_01
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_02
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_03
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_04
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_05
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_06
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_07
-FileCreateDir, %Title%\04_EXPORT_OBJ\LOD_08
+FileCreateDir, %Title%\04_OBJ
+FileCreateDir, %Title%\04_OBJ_RAW
+FileCreateDir, %Title%\04_OBJ\LOD_00_UHD_Project
+FileCopy, C:\Default.obj.rcInfo, %Title%\04_OBJ\LOD_00_UHD_Project  ;RealityCapture obj info file
 
-FileCreateDir, %Title%\05_EXPORT_TEX
+FileCreateDir, %Title%\04_OBJ\LOD_00
+FileCreateDir, %Title%\04_OBJ\LOD_01
+FileCreateDir, %Title%\04_OBJ\LOD_02
+FileCreateDir, %Title%\04_OBJ\LOD_03
+FileCreateDir, %Title%\04_OBJ\LOD_04
+FileCreateDir, %Title%\04_OBJ\LOD_05
+FileCreateDir, %Title%\04_OBJ\LOD_06
+FileCreateDir, %Title%\04_OBJ\LOD_07
+FileCreateDir, %Title%\04_OBJ\LOD_08
+
+FileCreateDir, %Title%\05_TEX
 
 FileCreateDir, %Title%\06_RENDERS
 
-FileCreateDir, %Title%\07_RENDERS_STOCK_PHOTO
-FileCreateDir, %Title%\07_RENDERS_STOCK_3D_MODELS
-FileCreateDir, %Title%\07_RENDERS_STOCK_GRAFIKE
+FileCreateDir, %Title%\07_STOCK_RENDER_FINAL
+FileCreateDir, %Title%\07_STOCK_3D_MODELS_FINAL
+;FileCreateDir, %Title%\07_STOCK_GRAFIKE
 
 FileCreateDir, %Title%\08_ASSETS
 
@@ -851,6 +776,7 @@ Send, ^+6
 Sleep, 2000
 Gui, Destroy
 Return
+
 ----------------------------------------------------------------------------------------------------------------
 ----  DELETE EMPTY FOLDERS  ------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------
@@ -922,7 +848,7 @@ Return
 
 
 ----------------------------------------------------------------------------------------------------------------
-----  DELETE EMPTY FOLDERS  ------------------------------------------------------------------------------------
+----  SHOW INFOR FILE  -----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------
 
 #IfWinActive, ahk_class CabinetWClass
@@ -932,8 +858,8 @@ Return
 
 
  ---------------------------------------------------------------------------------------------------------------
- ----  SHOW SHORTCUTS  -------------- Shift + Num Minus --------------------------------------------------------
- ---------------------------------------------------------------------------------------------------------------
+ ----  SHOW SHORTCUTS  -------------- Shift + Num Multiply -----------------------------------------------------
+ ------------------------------------------------------------------------c---------------------------------------
 
 <+NumpadMult::
    Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
