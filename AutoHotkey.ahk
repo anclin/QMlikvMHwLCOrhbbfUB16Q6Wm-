@@ -747,10 +747,10 @@ FileCreateDir, %Title%\02_PHOTOS_JPG
 FileCreateDir, %Title%\03_PROGRAMS
 
 FileCreateDir, %Title%\04_OBJ
-FileCreateDir, %Title%\04_OBJ_RAW
-FileCreateDir, %Title%\04_OBJ\LOD_00_UHD_Project
+FileCreateDir, %Title%\04_OBJ_RAW\RC
+FileCreateDir, %Title%\04_OBJ_RAW\ZBR_UHD
 FileCopy, C:\Default.obj.rcInfo, %Title%\04_OBJ\LOD_00_UHD_Project  ;RealityCapture obj info file
-
+/*
 FileCreateDir, %Title%\04_OBJ\LOD_00
 FileCreateDir, %Title%\04_OBJ\LOD_01
 FileCreateDir, %Title%\04_OBJ\LOD_02
@@ -760,7 +760,7 @@ FileCreateDir, %Title%\04_OBJ\LOD_05
 FileCreateDir, %Title%\04_OBJ\LOD_06
 FileCreateDir, %Title%\04_OBJ\LOD_07
 FileCreateDir, %Title%\04_OBJ\LOD_08
-
+*/
 FileCreateDir, %Title%\05_TEX
 
 FileCreateDir, %Title%\06_RENDERS
