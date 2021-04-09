@@ -1,16 +1,25 @@
 #Persistent
+#SingleInstance force
+;http://patorjk.com/software/taag/#p=display&h=0&v=0&f=ANSI%20Regular&t=RC%20CLEAN%20NAMES
 
+~^s::
+{
+	IfWinActive, AHK - Visual Studio Code
+	{
+		Sleep, 200
+		Reload
+	}
+	return
+}
+	 
  --------------------------------------------------------------
- -----  Windows Key Switch ------------------------------------
+ ----- Mac Keyboard Windows Key Switch ------------------------
  --------------------------------------------------------------
 
 *LWin::LAlt
 *LAlt::LWin
-/*
-Space::
-MouseClick, Left,
-Return
-*/
+
+
  ---------- Undo & Redo  ----------
 
 ; Undo
@@ -18,40 +27,50 @@ Return
 
 ; Redo
 ;#y::^y
-
+!Tab::Esc
 
  --------------------------------------------------------------
- -----  Media Keys ---------------------------------------------
+ -----  Media Keys --------------------------------------------
  --------------------------------------------------------------
-
 F13::Media_Prev
 F14::Media_Play_Pause
 F15::Media_Next
-
-;F16::Run calc.exe
-F16::!p
-
 
 F17::Volume_Down
 F18::Volume_Up
 F19::Volume_Mute
 
-
- --------------------------------------------------------------
- ----  Shortcut - Snipping Tool  ------------------------------
- --------------------------------------------------------------
+;F16::Run calc.exe
+F16::!p ;Spotify Favorite
 
 
+---- Snipping Tool  ------------------------------
 +^!4:: 
 Run, %windir%\system32\SnippingTool.exe
 Sleep, 200 
 Send, ^N
 Return
 
+---- Explorer -> Enter for Rename  ------------------------------
+/*
+#IfWinActive, ahk_class CabinetWClass
+Enter::F2
+#IfWinActive
+*/
 
- --------------------------------------------------------------
- ---- Text Replacing  -----------------------------------------
- --------------------------------------------------------------
+----  SHOW INFO FILE  --------- LCtrl + i -----------------
+#IfWinActive, ahk_class CabinetWClass
+<^i:: !Enter
+Return
+#IfWinActive
+
+/*
+████████ ██   ██ ████████     ██████  ███████ ██████  ██       █████   ██████ ██ ███    ██  ██████  
+   ██     ██ ██     ██        ██   ██ ██      ██   ██ ██      ██   ██ ██      ██ ████   ██ ██       
+   ██      ███      ██        ██████  █████   ██████  ██      ███████ ██      ██ ██ ██  ██ ██   ███ 
+   ██     ██ ██     ██        ██   ██ ██      ██      ██      ██   ██ ██      ██ ██  ██ ██ ██    ██ 
+   ██    ██   ██    ██        ██   ██ ███████ ██      ███████ ██   ██  ██████ ██ ██   ████  ██████ 
+*/
 
  --------  Todays Date  ---------------------
 <^!NumpadAdd::
@@ -60,27 +79,22 @@ SendInput %CurrentDateTime%
 return
 
 
- --------  Greeting SLO  ---------------------
-:*:ppo::
-send, Pozdravi,{enter}{enter}{enter}{enter}Lp,{enter}Anclin T.{up}{up}{up}
-return
-
- --------  Greeting ENG  ---------------------
-:*:ppi::
-send, Hello,{enter}{enter}I'm Tadej from video production company based in Slovenia. {enter}{enter}Best regards,{enter}Anclin Tadej, {enter}post producer at New Dimension{up}{up}{up}
-return
-
-
  -------- Replacing  ---------------------
 
 :*:anclin.::anclin.tadej@gmail.com
-:*:info@::info@notr.si
-:*:info"::info@notr.si
+:*:hello"::hello@mun.si
+/*
+:*:info@n::info@notr.si
+:*:info"n::info@notr.si
+:*:info@::info@anclintadej.com
+:*:info"::info@anclintadej.com
+
 :*:bor@::bor@notr.si
 :*:bor"::bor@notr.si
 :*:tadej@::tadej@notr.si
 :*:tadej"::tadej@notr.si
 :*:@g::@gmail.com
+*/
 
 :*:(L)::(Y)
 :*:>D:::D
@@ -88,42 +102,145 @@ return
 :*:<(::;)
 :*:>O:::O
 
+
 :*:yt::YouTube
 :*:wt::WeTransfer
-:*:NDD::New Dimension
-:*:iin::Infinity Pad
-:*:mmo::Mushroom
-:*:mmi::Mycelium
 
-^!2::@
+:*:cerklje::Cerklje na Gorenjskem
+:*:lahov::Lahov{U+010D}e 91
+
+<^!2::
+Send, @
+Return
+
+^+2::
+Send, @
+Return
 
  ---------- Dictionary  ----------
-
 :*:havent::haven't 
 :*:didnt::didn't 
 :*:realy::really 
 :*:im ::I'm{Space}
-:*:zanimiram::z-animiram
-:*:poanimiram::po animiram
 
 
 
 
+ ---------------------------------------------------------------------------------------------------------------
+ ----  SHOW SHORTCUTS  -------------- Shift + Num Multiply -----------------------------------------------------
+ ---------------------------------------------------------------------------------------------------------------
 
- ---------------------------------------------------------------------------------------------
- ----  APPLICATIONS SCRIPTS  -----------------------------------------------------------------
- ---------------------------------------------------------------------------------------------
+<+NumpadMult::
+	Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
+	Gui, Color, dddddd
+	Gui, Font, 000000 s10 , Arial
+	Gui, Add, Text,, FOLDERS`n`nCtrl + Alt + Shift + Num Minus = Delete Empty Folders`nCtrl + Shift + Num Minus = Copy folder list to clipboard`nCtrl + Alt + Num Minus = Make Folders`nCtrl + Alt + Num Plus = Write Today's Date`n`n Adobe PREMIERE PRO`n`nCtrl + BB = Make Folders`n`nCtrl + RR = Speed Up to 200`nCtrl + RRR = Speed Up to 300`nCtrl + RRRR = Speed Up to 400`n`nCtrl + Shift + RR = Reverse Speed`nShift + R = Reset Speed to 100`n`nShift + RR = Speed Down to 200`nShift + RRR = Speed Down to 300`nShift + RRRR = Speed Down to 400`n`nCtrl + NN = Nest & Warp Stabelize`n`nAHK SHORTCUTS`n`n^ = Control`n! = Alt`n+ = Shift`n`nCtrl + R = Add custom suffix`nCtrl + Alt + Shift + Num Add = Advanced Renamer
+	Gui, Show, NoActivate, X0, Y0
+
+Sleep, 7000
+Gui, Destroy
+Return
 
 
+/*
+███████ ██       █████   ██████ ██   ██ 
+██      ██      ██   ██ ██      ██  ██  
+███████ ██      ███████ ██      █████   
+     ██ ██      ██   ██ ██      ██  ██  
+███████ ███████ ██   ██  ██████ ██   ██
+*/
+ ---------------------------------------------------------------------------------------------------------------
+ ----  SLACK GIPHY  -----------------------------------------------------
+ ---------------------------------------------------------------------------------------------------------------
+
+#IfWinActive, ahk_exe slack.exe
+<^d::
+Send, {Tab}
+Send, {Enter}
+Send, GIPHY
+Sleep, 650
+Send, {Tab}
+Send, {Enter}
+Return
+#IfWinActive
+
+
+
+/*
+ ██████ ██   ██ ██████   ██████  ███    ███ ███████ 
+██      ██   ██ ██   ██ ██    ██ ████  ████ ██      
+██      ███████ ██████  ██    ██ ██ ████ ██ █████   
+██      ██   ██ ██   ██ ██    ██ ██  ██  ██ ██      
+ ██████ ██   ██ ██   ██  ██████  ██      ██ ███████
+*/
+ ---------------------------------------------------------------------------------------------------------------
+ ----  SPREAD SHEET - MERGE CELL  -----------------------------------------------------
+ ---------------------------------------------------------------------------------------------------------------
+/*
+#IfWinActive, ahk_class Chrome
+Send, !o
+Sleep, 100
+Send, {M}
+Sleep, 100
+Send, {Enter}
+Return
+#IfWinActive
+*/
+/*
+        ███████ ██    ██ ███████ ███████ ██ ██   ██ 
+        ██      ██    ██ ██      ██      ██  ██ ██  
+        ███████ ██    ██ █████   █████   ██   ███   
+             ██ ██    ██ ██      ██      ██  ██ ██  
+███████ ███████  ██████  ██      ██      ██ ██   ██
+*/
+#IfWinActive, ahk_class CabinetWClass
+^r::
+    Explorer_GetSelection(hwnd="") {
+	hwnd := hwnd ? hwnd : WinExist("A")
+	WinGetClass class, ahk_id %hwnd%
+	InputBox, suf, What's the _sufix?, promp,,100,100
+	if (class="CabinetWClass" or class="ExploreWClass" or class="Progman")
+		for window in ComObjCreate("Shell.Application").Windows
+			if (window.hwnd==hwnd)
+    CurrentWindow := window.Document.SelectedItems
+	for item in CurrentWindow {
+	    Selectedfile := item.path ; Getting selected file with full path.
+        SplitPath, % Selectedfile,name, dir, ext, name_no_ext ; Getting the path, name, name without extension and the extension of the selected file.
+        FileMove, % Selectedfile, %dir%\%name_no_ext%%suf%.%ext% ; Adding "%suf%" to the name of the file.
+        RenameLog = %RenameLog%%name%  --->  %name_no_ext%%suf%.%ext%`n ; Adding current change to the Log message at the end.
+        Selectedfile := ; Clearing the selected file variable to be ready for the next selected item if exist.
+    }
+	If (RenameLog <> "") {
+		;Msgbox Renaming Log:`n`n%RenameLog%
+	}
+	else {
+		;Msgbox Cannot get the selected files, it is not an Explorer Window or nothing is selected.
+    }
+}
+Return
+#IfWinActive
+
+
+
+
+/*
+ █████  ███████ ████████ ███████ ██████      ███████ ███████ ███████ ███████  ██████ ████████ ███████ 
+██   ██ ██         ██    ██      ██   ██     ██      ██      ██      ██      ██         ██    ██      
+███████ █████      ██    █████   ██████      █████   █████   █████   █████   ██         ██    ███████ 
+██   ██ ██         ██    ██      ██   ██     ██      ██      ██      ██      ██         ██         ██ 
+██   ██ ██         ██    ███████ ██   ██     ███████ ██      ██      ███████  ██████    ██    ███████ 
+                                                                                                      
+*/
 ------------------------------------------------------------------------------------------------------
 ---------------- Adobe After Effects  ----------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
-#IfWinActive, ahk_exe AfterFX.exe
+;#IfWinActive, ahk_exe AfterFX.exe
 
 ;;z::y
 ;;y::z
+
+-------------- FAST NESTING OR/AND STABELIZE --------------------------- DISABLED 
 /*
------------------------ FAST NESTING OR/AND STABELIZE ---------------------------------------
 m::
 t := A_PriorHotkey == A_ThisHotkey && A_TimeSincePriorHotkey < 200 ? "off" : -200
 settimer, num3, %t%
@@ -143,7 +260,7 @@ Send, {LControl space}
 Return 
 */
 ------------ AE FOLDERS MAKING --------
-
+#IfWinActive, ahk_exe AfterFX.exe
 !^+n::
 t := A_PriorHotkey == A_ThisHotkey && A_TimeSincePriorHotkey < 200 ? "off" : -200
 settimer, num4, %t%
@@ -157,31 +274,80 @@ Return
 
 double4:
 Send, !^+n
-Send, _Folders
+Send, 00_Folders
 Send, {Enter}
 Send, !^+n
-Send, FOOTAGE
-Send, {Enter}
-Send, {Up}
-Send, !^+n
-Send, SEQUENCES
+Send, 05_PRECOMPS
 Send, {Enter}
 Send, {Up}{Up}
 Send, !^+n
-Send, PRECOMPS
+Send, 04_AUDIO
 Send, {Enter}
 Send, {Up}{Up}
 Send, !^+n
-Send, GRAPHICS
+Send, 03_ASSETS
 Send, {Enter}
 Send, {Up}{Up}
 Send, !^+n
-Send, AUDIO
+Send, 01_SEQUENCES
 Send, {Enter}
+Send, {Up}{Up}
+Send, !^+n
+Send, 02_FOOTAGE
+Send, {Enter}
+Send, {Up}{Up}
+Send, {Down}{Shift+Down}{Shift+Down}{Shift+Down}{Shift+Down}{Shift+Down}
+
+
+
+
+Return 
+#IfWinActive
+
+
+
+
+
+
+/*
+
+
+------------ AE MAKE SET MATTE EFFECT --------
+#IfWinActive, ahk_exe AfterFX.exe
+m::
+if counter >= 0 ; setTimer already started, so we log the keypress instead
+{
+	counter++
+	return
+}
+counter = 0 ; Start setTimer and set the number of logged keypresses to 0
+setTimer,keyWinD, 400
+return
+
+keyWinD:
+setTimer,keyWinD,off
+if counter = 0 ; The key is pressed once
+{
+Send, m
+}
+if counter = 1 ; The key is pressed twice
+{
+Send, mm
+}
+if counter = 2 ; The key is pressed thrice
+{
+	Send, {RButton}
+	Send, {Down 10}
+	send, {Right}
+	Send, {Down 10}
+	Send, {Enter}
+}
+counter = -1
 Return 
 
 #IfWinActive
 /*
+*/
 ------------ AE SHORT ADJ LAYER --------
 
 !#z::
@@ -207,10 +373,10 @@ Send, !+b
 
 Return 
 
-#IfWinActive
-/*
 
------------- AE REPLACEMENT --------
+
+
+------------ AE REPLACEMENT --------  DISABLED 
 /*
 :*:loopo::loopOut("cycle")
 
@@ -284,17 +450,57 @@ Send, {Shift Left Left}
 Return
 */
 ------------------------------------------------------------------------------------------------------
----------------- Adobe Premiere Pro ------------------------------------------------------------------
+---------------- Adobe Adobe Premiere Pro ------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
-#IfWinActive, ahk_exe Adobe Premiere Pro.exe
+/*
+██████  ██████  ███████ ███    ███ ██ ███████ ██████  ███████     ██████  ██████   ██████  
+██   ██ ██   ██ ██      ████  ████ ██ ██      ██   ██ ██          ██   ██ ██   ██ ██    ██ 
+██████  ██████  █████   ██ ████ ██ ██ █████   ██████  █████       ██████  ██████  ██    ██ 
+██      ██   ██ ██      ██  ██  ██ ██ ██      ██   ██ ██          ██      ██   ██ ██    ██ 
+██      ██   ██ ███████ ██      ██ ██ ███████ ██   ██ ███████     ██      ██   ██  ██████  
+ */                                                                                          
+                                                                                           
+
+
+-------------------- repeating some clicks -------------------
+#IfWinActive Adobe Premiere Pro
++!k::
+
+InputBox, rnum, How many times?
+
+Loop, %rnum%,
+{
+
+Send, {Down}
+Send, ^k
+Sleep, 700
+
+}
+
 Return
 
+
+Return
+#IfWinActive
+-------------------- Replace some text ------------------- DISABLED 
 /*
 :*:_hor::_horizontal
 :*:_ver::_vertical
 :*:_sq::_square
 */
--------------------- FX Warp -------------------
+-------------------- FX Warp ------------------- DISABLED 
+#IfWinActive Adobe Premiere Pro
+/*
+-::
+MouseClick, L, 1100, 600,
+Send, {Home}
+Send, {End}
+Send, ^!+e
+Send, {Tab}{Tab}
+Send, warp
+MouseClickDrag, L,1400, 300, 970, 830, 
+Return
+*/
 /*
 ^!+E::
 if counter >= 0 ; setTimer already started, so we log the keypress instead
@@ -325,7 +531,37 @@ if counter = 2 ; The key is pressed thrice
 counter = -1
 return
 */
+----------------------- FIXING FALVIAR SUBS ---------------------------------------
+#IfWinActive Adobe Premiere Pro
+Esc::
+zloop = 1 ; STOP LOOP
+Return
+
+#IfWinActive Adobe Premiere Pro
+<^+f::
+Loop, 100
+{ ;commands -- START
+MouseClick, Left , 1150, 170, 2
+Sleep, 500
+MouseClick, Left , 1200, 410, 2
+MouseClick, Left , 1200, 410, 2
+Sleep, 500
+Send, 1520
+MouseClick, Left , 571, 471, 2
+Sleep, 500
+Send, {Down}
+
+;commands -- FINISH
+  if zloop = 1
+  {
+    zloop = 0
+    break
+  }
+}
+Return 
+
 ----------------------- FAST NESTING OR/AND STABELIZE ---------------------------------------
+#IfWinActive Adobe Premiere Pro
 <^n::
 t := A_PriorHotkey == A_ThisHotkey && A_TimeSincePriorHotkey < 200 ? "off" : -200
 settimer, num2, %t%
@@ -356,6 +592,7 @@ MouseClick, left, %MouseVarNestX%, %MouseVarNestY%, 1
 
 Return 
 ---------------------- MAKE FOLDERS ---------------------------------------
+#IfWinActive Adobe Premiere Pro
 <^b::
 t := A_PriorHotkey == A_ThisHotkey && A_TimeSincePriorHotkey < 200 ? "off" : -200
 settimer, num1, %t%
@@ -392,10 +629,13 @@ Send, ^b
 Send, 07_PRECOMPS{Enter}{escape}{up}{up}
 Send, ^b
 Send, 05_ASSETS{Enter}{escape}{up}{up}
+Send, ^b
+Send, 07_AE_LINKS{Enter}{escape}{up}{up}
 
 Return 
 
 -------------------- REVERSE SPEED 100 -------------------
+#IfWinActive Adobe Premiere Pro
 <^+r::
 	Send, <^r
 	Send, {Tab}
@@ -404,7 +644,7 @@ Return
 	Send, {Enter}
 return
 
--------------------- ADD CAPTION -------------------
+-------------------- ADD CAPTION ------------------- DISABLED 
 /*
 y::
 	; Get the position of the mouse
@@ -420,7 +660,7 @@ return
 */
 
 
--------------------- 25 or 50 or 100 INTERPERATE FOOTAGE FPS-------------------	
+-------------------- 25 or 50 or 100 INTERPERATE FOOTAGE FPS------------------- DISABLED 	
 /*
 <+^!r::
 if counter >= 0 ; setTimer already started, so we log the keypress instead
@@ -466,7 +706,7 @@ return
 */
 
 -------------------- 50 or 100 SPEED DOWN -------------------
-
+#IfWinActive Adobe Premiere Pro
 <+r::
 if counter >= 0 ; setTimer already started, so we log the keypress instead
 {
@@ -502,7 +742,7 @@ return
 
 
 -------------------- 100 or 400 SPEED UP -------------------
-
+#IfWinActive Adobe Premiere Pro
 <^r::
 if counter >= 0 ; setTimer already started, so we log the keypress instead
 {
@@ -540,74 +780,50 @@ if counter = 3 ; The key is pressed fries
 counter = -1
 return
 
-#IfWinActive
+#IfWinActive Adobe Premiere Pro
+XButton1::Up
 
+#IfWinActive Adobe Premiere Pro
+XButton2::Down
+
+
+
+
+
+/*
+
+██      ██  ██████  ██   ██ ██████  ████████  ██████   ██████  ███    ███ 
+██      ██ ██       ██   ██ ██   ██    ██    ██    ██ ██    ██ ████  ████ 
+██      ██ ██   ███ ███████ ██████     ██    ██    ██ ██    ██ ██ ████ ██ 
+██      ██ ██    ██ ██   ██ ██   ██    ██    ██    ██ ██    ██ ██  ██  ██ 
+███████ ██  ██████  ██   ██ ██   ██    ██     ██████   ██████  ██      ██ 
+  */                                                                        
+                                                                          
  -------------------------------------------------------------------------------------------------------------
  ---------------- Adobe Lighrtoom ----------------------------------------------------------------------------
  -------------------------------------------------------------------------------------------------------------
+                                                                                                                  
+                                                                                                                     
+                                                                           
 
--------- Import key swap ----- Disabled
+
+-------- Import key swap -----
 
 #IfWinActive, ahk_exe Lightroom.exe
-
 Esc::
-
 #IfWinActive
 
 
 
--------------------------------------------------------------------------------------------------------------
----------------- Blackmagic Davinci Resolve -----------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------
+
+
 /*
-#IfWinActive, ahk_exe Resolve.exe
-Return
-
-^z::^z
-
-; Redo
-^y::^y
-
--------- Numpad to dot -----
-NumpadDot::.
-3::d
-^L::^+L
-
-
--------- Paralel Node Click -----
-^W::
-MouseGetPos, xpos, ypos
-MouseClick, left , 560, 40
-Sleep, 100
-MouseMove, 560, 65, 10
-MouseClick, left , 800, 65
-Sleep, 100
-MouseClick, left , 950, 150
-MouseMove, xpos, ypos+65, 5
-MouseClick, Right
-MouseMove, 10, 40 , Speed, Relative
-MouseClick, Left
-Return
-
-^Q::
-MouseGetPos, xpos, ypos
-MouseClick, left , 560, 40
-Sleep, 100
-MouseMove, 560, 65, 10
-MouseClick, left , 800, 65
-Sleep, 100
-MouseClick, left , 950, 150
-MouseMove, xpos, ypos+65, 5
-MouseClick, Right
-MouseMove, 10, 40 , Speed, Relative
-MouseClick, Left
-Return
-
-#IfWinActive
-*/
-
-
-
+ █████  ██    ██ ██████  ██  ██████      ███████ ██     ██ ██ ████████  ██████ ██   ██ 
+██   ██ ██    ██ ██   ██ ██ ██    ██     ██      ██     ██ ██    ██    ██      ██   ██ 
+███████ ██    ██ ██   ██ ██ ██    ██     ███████ ██  █  ██ ██    ██    ██      ███████ 
+██   ██ ██    ██ ██   ██ ██ ██    ██          ██ ██ ███ ██ ██    ██    ██      ██   ██ 
+██   ██  ██████  ██████  ██  ██████      ███████  ███ ███  ██    ██     ██████ ██   ██ 
+ */                                                                                                                                                                            
  --------------------------------------------------------------------
  ------  AUDIO SWITCH  ---------------------------------------------- DISABLED 
  --------------------------------------------------------------------
@@ -628,30 +844,56 @@ return
 
 
 
---------------------------------------------------------------
-----  LOCK SCREEN -------------------------------------------- DISABLED 
---------------------------------------------------------------
+
+
+
+
+
 /*
-F16::             ; Win-X = Monitor Off (key-press, mouse move switches back ON)
-{
-Sleep, 200
-DllCall("LockWorkStation")
-Sleep, 200
-SendMessage,0x112,0xF170,2,,Program Manager
-}
+██████   ██████      ██████ ██      ███████  █████  ███    ██     ███    ██  █████  ███    ███ ███████ ███████ 
+██   ██ ██          ██      ██      ██      ██   ██ ████   ██     ████   ██ ██   ██ ████  ████ ██      ██      
+██████  ██          ██      ██      █████   ███████ ██ ██  ██     ██ ██  ██ ███████ ██ ████ ██ █████   ███████ 
+██   ██ ██          ██      ██      ██      ██   ██ ██  ██ ██     ██  ██ ██ ██   ██ ██  ██  ██ ██           ██ 
+██   ██  ██████      ██████ ███████ ███████ ██   ██ ██   ████     ██   ████ ██   ██ ██      ██ ███████ ███████                                                                                                  
 */
-
-
-
 ----------------------------------------------------------------------------------------------------------------
----- EXPLORER -  CREATE WORKIGN FOLDERS ------------------------------------------------------------------------
+---- EXPLORER -  CREATE VIDEO FOLDERS ------------------------LCtrl + Alt + Shift + Num Add ------------------------------
 ----------------------------------------------------------------------------------------------------------------
+
+
+#IfWinActive, ahk_class CabinetWClass
+^!+NumpadAdd:: 
+#IfWinActive, ahk_class ExploreWClass
+^!+NumpadAdd:: 
+
+Run F:\RC\RC_RESOURCES\Handy Tools\Renamer.ahk
+Return
+#IfWinActive
+#IfWinActive
+
+
+
+
+
+
+
+/*
+██    ██ ██ ██████  ███████  ██████      ███████  ██████  ██      ██████  ███████ ██████  ███████ 
+██    ██ ██ ██   ██ ██      ██    ██     ██      ██    ██ ██      ██   ██ ██      ██   ██ ██      
+██    ██ ██ ██   ██ █████   ██    ██     █████   ██    ██ ██      ██   ██ █████   ██████  ███████ 
+ ██  ██  ██ ██   ██ ██      ██    ██     ██      ██    ██ ██      ██   ██ ██      ██   ██      ██ 
+  ████   ██ ██████  ███████  ██████      ██       ██████  ███████ ██████  ███████ ██   ██ ███████ 
+                                                                                                  
+*/
+----------------------------------------------------------------------------------------------------------------
+---- EXPLORER -  CREATE VIDEO FOLDERS ------------------------LCtrl + Alt + Num / ------------------------------
+----------------------------------------------------------------------------------------------------------------
+
 
 #IfWinActive, ahk_class CabinetWClass
 <^!NumpadSub:: 
 #IfWinActive, ahk_class ExploreWClass
 <^!NumpadSub:: 
-#IfWinActive
 WinGetTitle, Title, A
 
    Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
@@ -660,7 +902,7 @@ WinGetTitle, Title, A
 	Gui, Add, Text,, Making Folders in %Title%
 Gui, Show, NoActivate, X0, Y0
 
- 
+
 
 
 FileCreateDir, %Title%\01_FROM_CLIENT_ORIGINAL
@@ -708,23 +950,41 @@ FileCreateDir, %Title%\11_FONTS
 FileCreateDir, %Title%\12_EXPORTS
 FileCreateDir, %Title%\12_EXPORTS\PREVIEWS
 FileCreateDir, %Title%\12_EXPORTS\FINALS
-FileCreateDir, %Title%\12_EXPORTS\CINEGRAPH
 
 Send, ^+6
 Sleep, 2000
 Gui, Destroy
 Return
+#IfWinActive
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+██████   ██████     ███████  ██████  ██      ██████  ███████ ██████  ███████ 
+██   ██ ██          ██      ██    ██ ██      ██   ██ ██      ██   ██ ██      
+██████  ██          █████   ██    ██ ██      ██   ██ █████   ██████  ███████ 
+██   ██ ██          ██      ██    ██ ██      ██   ██ ██      ██   ██      ██ 
+██   ██  ██████     ██       ██████  ███████ ██████  ███████ ██   ██ ███████ 
+*/
 ----------------------------------------------------------------------------------------------------------------
----- EXPLORER -  CREATE REALITY CAPTURE FOLDERS ------------------------------------------------------------------------
+---- EXPLORER -  CREATE REALITY CAPTURE FOLDERS ------------- LCtrl + Alt + Num * -------------------------------
 ----------------------------------------------------------------------------------------------------------------
 
 #IfWinActive, ahk_class CabinetWClass
 <^!NumpadMult:: 
 #IfWinActive, ahk_class ExploreWClass
 <^!NumpadMult:: 
-#IfWinActive
 WinGetTitle, Title, A
 
    Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
@@ -745,12 +1005,21 @@ FileCreateDir, %Title%\02_PHOTOS_JPG
 ;FileCreateDir, %Title%\02_PHOTOS_TIFs\Camera
 
 FileCreateDir, %Title%\03_PROGRAMS
+FileCreateDir, %Title%\03_PROGRAMS\01_RC
+FileCreateDir, %Title%\03_PROGRAMS\01_MT
+FileCreateDir, %Title%\03_PROGRAMS\02_ZB
+FileCreateDir, %Title%\03_PROGRAMS\03_C4D
+FileCreateDir, %Title%\03_PROGRAMS\04_After_Effects
+FileCreateDir, %Title%\03_PROGRAMS\05_OTHR
 
 FileCreateDir, %Title%\04_OBJ
+
+FileCreateDir, %Title%\04_OBJ_RAW
 FileCreateDir, %Title%\04_OBJ_RAW\RC
-FileCreateDir, %Title%\04_OBJ_RAW\ZBR_UHD
-FileCopy, C:\Default.obj.rcInfo, %Title%\04_OBJ\LOD_00_UHD_Project  ;RealityCapture obj info file
-/*
+FileCreateDir, %Title%\04_OBJ_RAW\ZBR
+FileCreateDir, %Title%\04_OBJ_RAW\TEX
+
+/*FileCopy, C:\Default.obj.rcInfo, %Title%\04_OBJ\LOD_00_UHD_Project  ;RealityCapture obj info file
 FileCreateDir, %Title%\04_OBJ\LOD_00
 FileCreateDir, %Title%\04_OBJ\LOD_01
 FileCreateDir, %Title%\04_OBJ\LOD_02
@@ -765,8 +1034,11 @@ FileCreateDir, %Title%\05_TEX
 
 FileCreateDir, %Title%\06_RENDERS
 
-FileCreateDir, %Title%\07_STOCK_RENDER_FINAL
-FileCreateDir, %Title%\07_STOCK_3D_MODELS_FINAL
+FileCreateDir, %Title%\07_STOCK_FINAL_MEDIA
+FileCreateDir, %Title%\07_STOCK_FINAL_MODELS
+FileCreateDir, %Title%\07_STOCK_FINAL_MODELS\tex
+FileCreateDir, %Title%\07_STOCK_FINAL_MODELS\obj
+FileCreateDir, %Title%\07_STOCK_FINAL_MODELS\previews
 ;FileCreateDir, %Title%\07_STOCK_GRAFIKE
 
 FileCreateDir, %Title%\08_ASSETS
@@ -776,16 +1048,154 @@ Send, ^+6
 Sleep, 2000
 Gui, Destroy
 Return
+#IfWinActive
 
+
+
+
+
+
+/*
+███    ██ ██    ██ ███    ███     ███████  ██████  ██      ██████  ███████ ██████  ███████ 
+████   ██ ██    ██ ████  ████     ██      ██    ██ ██      ██   ██ ██      ██   ██ ██      
+██ ██  ██ ██    ██ ██ ████ ██     █████   ██    ██ ██      ██   ██ █████   ██████  ███████ 
+██  ██ ██ ██    ██ ██  ██  ██     ██      ██    ██ ██      ██   ██ ██      ██   ██      ██ 
+██   ████  ██████  ██      ██     ██       ██████  ███████ ██████  ███████ ██   ██ ███████ 
+*/
 ----------------------------------------------------------------------------------------------------------------
-----  DELETE EMPTY FOLDERS  ------------------------------------------------------------------------------------
+---- EXPLORER -  CREATE NUMMMEROUS FOLDERS ---------- LCtrl + Alt + Num1 / Num2 / Num3 /Num4 /------------------
+----------------------------------------------------------------------------------------------------------------
+	;-----------10 Folders ---------- Start
+
+#IfWinActive, ahk_class CabinetWClass
+<^!Numpad1:: 
+#IfWinActive, ahk_class ExploreWClass
+<^!Numpad1:: 
+WinGetTitle, Title, A
+WinGetTitle, Title, A
+
+   Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
+   Gui, Color, dddddd
+   Gui, Font, 000000 s8 , Arial
+	Gui, Add, Text,, 10 Folders
+Gui, Show, NoActivate, X0, Y0
+
+FileCreateDir, %Title%\e01
+FileCreateDir, %Title%\e02
+FileCreateDir, %Title%\e03
+FileCreateDir, %Title%\e04
+FileCreateDir, %Title%\e05
+FileCreateDir, %Title%\e06
+FileCreateDir, %Title%\e07
+FileCreateDir, %Title%\e08
+FileCreateDir, %Title%\e09
+FileCreateDir, %Title%\e10
+
+Send, ^+6
+Sleep, 2000
+Gui, Destroy
+Return
+#IfWinActive
+	;-----------10 Folders ---------- End
+
+	;-----------20 Folders ---------- start
+	#IfWinActive, ahk_class CabinetWClass
+<^!Numpad2:: 
+#IfWinActive, ahk_class ExploreWClass
+<^!Numpad2:: 
+WinGetTitle, Title, A
+WinGetTitle, Title, A
+
+   Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
+   Gui, Color, dddddd
+   Gui, Font, 000000 s8 , Arial
+	Gui, Add, Text,, === Flaviar Folders ===
+Gui, Show, NoActivate, X0, Y0
+
+FileCreateDir, %Title%\00 Assets\
+FileCreateDir, %Title%\00 Assets\01 Images
+FileCreateDir, %Title%\00 Assets\02 Video
+FileCreateDir, %Title%\00 Assets\03 Audio
+
+FileCreateDir, %Title%\01 Design\
+FileCreateDir, %Title%\01 Design\AE
+FileCreateDir, %Title%\01 Design\PR
+
+FileCreateDir, %Title%\02 Exports\01 Preview
+FileCreateDir, %Title%\02 Exports\02 Final
+FileCreateDir, %Title%\02 Exports\03 Clean
+
+
+
+Send, ^+6
+Sleep, 2000
+Gui, Destroy
+Return
+#IfWinActive
+	;-----------20 Folders ---------- end
+
+	;-----------30 Folders ---------- start
+	#IfWinActive, ahk_class CabinetWClass
+<^!Numpad3:: 
+#IfWinActive, ahk_class ExploreWClass
+<^!Numpad3:: 
+WinGetTitle, Title, A
+WinGetTitle, Title, A
+
+   Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
+   Gui, Color, dddddd
+   Gui, Font, 000000 s8 , Arial
+	Gui, Add, Text,, 30 Folders
+Gui, Show, NoActivate, X0, Y0
+
+FileCreateDir, %Title%\Tullibardine 500 Sheryy Cask Finish
+FileCreateDir, %Title%\Four Roses Single Barrel Bourbon
+FileCreateDir, %Title%\Writers Tears Copper Pot
+FileCreateDir, %Title%\Glenfarclas 105
+FileCreateDir, %Title%\Carol Ila 12 Year Old
+FileCreateDir, %Title%\Gold Of Mauritius Dark Rum
+FileCreateDir, %Title%\Glenkinchie 12 Year Old
+FileCreateDir, %Title%\Auchentoshan 12 YO
+FileCreateDir, %Title%\The Ileach Cask Strenght
+FileCreateDir, %Title%\Jameson Caskmates Stout Edition
+FileCreateDir, %Title%\Starward Nova Single Malt
+FileCreateDir, %Title%\Don Papa Small Batch Rum
+FileCreateDir, %Title%\Matusalem 15 Gran Reserva
+FileCreateDir, %Title%\Hercules Mulligan Rum & Rye
+FileCreateDir, %Title%\Knob Creek Patiently Aged Kentucky
+FileCreateDir, %Title%\Louis Royer Vsop Cognac
+FileCreateDir, %Title%\Baron Otard Vsop
+FileCreateDir, %Title%\Drumshanbo Gunbpowder Irish Gin
+FileCreateDir, %Title%\Aviation Gin
+FileCreateDir, %Title%\Le Pertuis Pure Malt Whisku
+
+Send, ^+6
+
+Gui, Destroy
+Return
+#IfWinActive
+	;-----------30 Folders ---------- end
+
+
+
+
+
+
+/*
+███████ ███    ███ ██████  ████████ ██    ██     ███████  ██████  ██      ██████  ███████ ██████  ███████ 
+██      ████  ████ ██   ██    ██     ██  ██      ██      ██    ██ ██      ██   ██ ██      ██   ██ ██      
+█████   ██ ████ ██ ██████     ██      ████       █████   ██    ██ ██      ██   ██ █████   ██████  ███████ 
+██      ██  ██  ██ ██         ██       ██        ██      ██    ██ ██      ██   ██ ██      ██   ██      ██ 
+███████ ██      ██ ██         ██       ██        ██       ██████  ███████ ██████  ███████ ██   ██ ███████ 
+*/                                                                                                          
+----------------------------------------------------------------------------------------------------------------
+----  DELETE EMPTY FOLDERS  ---------------------------------- LCtrl + Shift + Alt + Num Sub -----------------------------------
 ----------------------------------------------------------------------------------------------------------------
 
 #IfWinActive, ahk_class CabinetWClass
 <^+!NumpadSub:: 
 #IfWinActive, ahk_class ExploreWClass
 <^+!NumpadSub:: 
-#IfWinActive
 WinGetTitle, Title, A
 
 SetBatchLines, -1  ; Make the operation run at maximum speed.
@@ -809,17 +1219,25 @@ Loop, %WhichFolder%\*, 2 ;,1
 		}
 	}
 return
+#IfWinActive
 
 
+
+/*
+ ██████  ██████  ██████  ██    ██     ███████ ██ ██      ███████     ██      ██ ███████ ████████ 
+██      ██    ██ ██   ██  ██  ██      ██      ██ ██      ██          ██      ██ ██         ██    
+██      ██    ██ ██████    ████       █████   ██ ██      █████       ██      ██ ███████    ██    
+██      ██    ██ ██         ██        ██      ██ ██      ██          ██      ██      ██    ██    
+ ██████  ██████  ██         ██        ██      ██ ███████ ███████     ███████ ██ ███████    ██    
+*/                                                                                                 
  ----------------------------------------------------------------------------------------------------------------
- ----  LIST AND COPY FILE LIST TO CLIPBOARD  --------------------------------------------------------------------
+ ----  LIST AND COPY FILE LIST TO CLIPBOARD  -------------- LCtrl + Shift + Num Sub ------------------------------------
  ----------------------------------------------------------------------------------------------------------------
 
 #IfWinActive, ahk_class CabinetWClass
 <^+NumpadSub:: 
 #IfWinActive, ahk_class ExploreWClass
 <^+NumpadSub:: 
-#IfWinActive
 WinGetTitle, Title, A
 
    Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
@@ -831,6 +1249,7 @@ Gui, Show, NoActivate, X0, Y0
 FileAppend, % list_files(Title),
 list_files(Title)
 {
+
 	files =
 	Loop %Title%\*.*
 	{
@@ -847,39 +1266,20 @@ Return
 #IfWinActive
 
 
-----------------------------------------------------------------------------------------------------------------
-----  SHOW INFOR FILE  -----------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------
-
-#IfWinActive, ahk_class CabinetWClass
-<^i:: !Enter
-Return
-#IfWinActive
-
-
- ---------------------------------------------------------------------------------------------------------------
- ----  SHOW SHORTCUTS  -------------- Shift + Num Multiply -----------------------------------------------------
- ------------------------------------------------------------------------c---------------------------------------
-
-<+NumpadMult::
-   Gui, +AlwaysOnTop +ToolWindow -SysMenu -Caption
-   Gui, Color, dddddd
-   Gui, Font, 000000 s10 , Arial
-	Gui, Add, Text,, FOLDERS`n`nCtrl + Alt + Shift + Num Minus = Delete Empty Folders`nCtrl + Shift + Num Minus = Copy folder list to clipboard`nCtrl + Alt + Num Minus = Make Folders`n`nCtrl + Alt + Num Plus = Write Today's Date`n`nPREMIERE PRO`n`nCtrl + BB = Make Folders`n`nCtrl + RR = Speed Up to 200`nCtrl + RRR = Speed Up to 300`nCtrl + RRRR = Speed Up to 400`n`nCtrl + Shift + RR = Reverse Speed`nShift + R = Reset Speed to 100`n`nShift + RR = Speed Down to 200`nShift + RRR = Speed Down to 300`nShift + RRRR = Speed Down to 400`n`nCtrl + NN = Nest & Warp Stabelize`n`nAHK SHORTCUTS`n`n^ = Control`n! = Alt`n+ = Shift`n
-
-Gui, Show, NoActivate, X0, Y0
-
-Sleep, 7000
-Gui, Destroy
 
 
 
 
-
-
-
+/*
+ ██████ ██ ███    ██ ███████ ███    ███  █████      ██   ██ ██████  
+██      ██ ████   ██ ██      ████  ████ ██   ██     ██   ██ ██   ██ 
+██      ██ ██ ██  ██ █████   ██ ████ ██ ███████     ███████ ██   ██ 
+██      ██ ██  ██ ██ ██      ██  ██  ██ ██   ██          ██ ██   ██ 
+ ██████ ██ ██   ████ ███████ ██      ██ ██   ██          ██ ██████  
+                                                                    
+*/
 -------------------------------------------------------------------------------------------------------------
----------------- CINEMA 4D ----------------------------------------------------------------------------------
+---------------- CINEMA 4D ------------------ CC (Letter C 2-times)--------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
 
 
@@ -891,16 +1291,18 @@ settimer, C4D1, %t%
 if (t == "off")
  goto C4D1double
 return
+#IfWinActive
 
+#IfWinActive, ahk_exe Cinema 4D.exe
 C4D1:
 Send, c
 Return
+#IfWinActive
 
+#IfWinActive, ahk_exe Cinema 4D.exe
 C4D1double:
 Send, x
 send, v
-
-
 Return 
 #IfWinActive
 
@@ -909,194 +1311,24 @@ Return
 
 
 
- ----------------------------------------------------------------------------------------------------------------
- ----  KNALD RENDERING  --------------------------------------------------------------------
- ----------------------------------------------------------------------------------------------------------------
 /*
-
-#IfWinActive, ahk_class CabinetWClass
-+NumpadAdd:: 
-#IfWinActive, ahk_class ExploreWClass
-+NumpadAdd:: 
-#IfWinActive
-
-FormatTime, CurrentDateTime,, yyMMdd_
-
-WinGetTitle, Title, A
-
-windowtitle = %Title%
-
-Stringsplit, path, windowtitle, \
-
-Projpath = %path2%%path3%
-
-Stringsplit, Projname, Projpath, _ 
-
- Run, knald.exe, C:\Program Files\Knald Technologies\Knald, max
-
-Sleep, 11000
-
-WinWait Knald - v1.2.1
-WinActivate  ; Uses the last found window.
-
-if WinExist("Knald - v1.2.1")
-{
-    WinActivate  ; Automatically s the window found above.
-    WinMaximize  ; same
-
-    MouseClick, left, 1500, 60, 1,
-    Sleep, 300
-    MouseClick, left, 1700, 180, 2,
-    Sleep, 300
-    Send, {BackSpace}
-    Sleep, 300
-    Send, %Projname2%
-    Sleep, 300
-    Send, {Tab}
-    Send, %path1%\%path2%\%path3%\05_EXPORT_TEX
-    Sleep, 300
-    Send, ^b
-    Sleep, 300
-    MouseClick, left, 1710, 60, 1,
-    Sleep, 300
-    MouseClick, left, 1576, 555, 1,
-    Send, %path1%/%path2%/%path3%/04_EXPORT_OBJ/LOD_00/%Projname2%_LOD_00.OBJ
-    Sleep, 300
-    MouseClick, left, 1576, 610, 1,
-    Send, %path1%/%path2%/%path3%/04_EXPORT_OBJ/LOD_04/%Projname2%_LOD_05.OBJ
-    Sleep, 300
-    MouseClick, left, 1650, 275, 1,
-    Send, %path1%/%path2%/%path3%/04_EXPORT_OBJ/LOD_04/%Projname2%_LOD_05.OBJ
-
-
-    return
-}
-
-if not WinExist("Calculator")
-    return
-else
-{
-	msgbox,  LOL
-    WinActivate  ; The above "IfWinNotExist" also set the "last found" window for us.
-    return
-}
-
-Return
-#IfWinActive
-
-
- ----------------------------------------------------------------------------------------------------------------
- ----  ZBRUSH LODs  --------------------------------------------------------------------
- ----------------------------------------------------------------------------------------------------------------
-
-
-#IfWinActive, ahk_class CabinetWClass
-+NumpadSub:: 
-#IfWinActive, ahk_class ExploreWClass
-+NumpadSub:: 
-#IfWinActive
-
-FormatTime, CurrentDateTime,, yyMMdd_
-
-WinGetTitle, Title, A
-
-windowtitle = %Title%
-
-Stringsplit, path, windowtitle, \
-
-Projpath = %path2%%path3%
-
-Stringsplit, Projname, Projpath, _ 
-
-
-
-;msgbox,  %path1%\%path2%\%path3%\05_EXPORT_TEX
-;msgbox,  %path3%.ZPR
-msgbox,  Export LODs
-;FileAppend, Another line.`n, C:\Test_Source.txt
-; The following example uses a continuation section to enhance readability and maintainability:
-
-FileAppend,	
-(
-[If, 1,
-[ISet,Tool:Geometry:SDiv,1] [FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_00\%Projname2%_LOD_00.obj"][FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_00\%Projname2%_LOD_00.obj"][IPress,Tool:Export]
-[ISet,Tool:Geometry:SDiv,2] [FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_01\%Projname2%_LOD_01.obj"][FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_01\%Projname2%_LOD_01.obj"][IPress,Tool:Export]
-[ISet,Tool:Geometry:SDiv,3] [FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_02\%Projname2%_LOD_02.obj"][FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_02\%Projname2%_LOD_02.obj"][IPress,Tool:Export]
-[ISet,Tool:Geometry:SDiv,4] [FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_03\%Projname2%_LOD_03.obj"][FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_03\%Projname2%_LOD_03.obj"][IPress,Tool:Export]
-[ISet,Tool:Geometry:SDiv,5] [FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_04\%Projname2%_LOD_04.obj"][FileNameSetNext,"%path1%\%path2%\%path3%\04_EXPORT_OBJ\LOD_04\%Projname2%_LOD_04.obj"][IPress,Tool:Export]
-[IPress,CLOSE]
-]
-
-), %path1%\%path2%\%path3%\03_PROGRAMS\DoItZScript.txt
-Sleep, 100
-;Run, %path1%\%path2%\%path3%\03_PROGRAMS\%path3%.ZPR
-;Sleep, 10000
-;msgbox,  Click OK when opened
-
-WinActivate  ZBrush
-Sleep, 500
-Send, ^+l
-Sleep, 250
-MouseClick, left, 650, 45, 1, Relative
-Sleep, 250
-SendInput, %path1%\%path2%\%path3%\03_PROGRAMS\
-Sleep, 250
-Send, {Enter}
-Sleep, 250
-MouseClick, left, 600, 200, 1, Relative
-Sleep, 250
-Send, d
-Sleep, 250
-Send, {Enter}
-Sleep, 250
-
-;FileDelete, %path1%\%path2%\%path3%\03_PROGRAMS\DoItZScript.txt
-;FileDelete, %path1%\%path2%\%path3%\03_PROGRAMS\DoItZScript.zsc
-
-msgbox,  Exported
-Return
-#IfWinActive
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- 		=ifs(M4<30,(10),and(M4>=30,M4<100),10,M4>=600;"Custom")
- 		=ifs(B112<30,(10),and(B112>=30,B112<100),10,B112>=600;"Custom")
-
-
-
- 		=ifs(ISBLANK(B113),(1),
- 		and(B113=>0, 2),3,
- 		 "","None")
-
-
-
-M:\RC\190506_VelenjePuske\04_EXPORT_OBJ\LOD_00\VelenjePuske_LOD_00.obj
-
-M:/RC/190506_VelenjePuske/04_EXPORT_OBJ/LOD_00/VelenjePuske_LOD_00.OBJ
-
-
-
-
-M:/RC/190506_VelenjePuske/04_EXPORT_OBJ/LOD_00/VelenjePuske_LOD_00.obj
-M:/RC/190506_VelenjePuske/04_EXPORT_OBJ/LOD_00/VelenjePuske_LOD_00.OBJ
-
-
-
- 		=ifs(M4<30,(SUM(M7:M)*1),
- 		and(M4>=30,M4<100),(SUM(M7:M)*1.20),
- 		and(M4>=100,M4<400),(SUM(M7:M)*1.50),
- 		and(M4>=400,M4<600),(SUM(M7:M)*1.75),
- 		M4>=600;"Custom")
+██████   █████  ██    ██ ██ ███    ██  ██████ ██     ██████  ███████ ███████  ██████  ██      ██    ██ ███████ 
+██   ██ ██   ██ ██    ██ ██ ████   ██ ██      ██     ██   ██ ██      ██      ██    ██ ██      ██    ██ ██      
+██   ██ ███████ ██    ██ ██ ██ ██  ██ ██      ██     ██████  █████   ███████ ██    ██ ██      ██    ██ █████   
+██   ██ ██   ██  ██  ██  ██ ██  ██ ██ ██      ██     ██   ██ ██           ██ ██    ██ ██       ██  ██  ██      
+██████  ██   ██   ████   ██ ██   ████  ██████ ██     ██   ██ ███████ ███████  ██████  ███████   ████   ███████                                                                   
 */
+
+
+---------------------- Redo & Undu Fix ---------------------------------------
+#IfWinActive, ahk_exe Resolve.exe
+<^y::
+Send, !+^1
+Return
+#IfWinActive
+
+#IfWinActive, ahk_exe Resolve.exe
+<^+y::
+Send, !+^2
+Return
+#IfWinActive
